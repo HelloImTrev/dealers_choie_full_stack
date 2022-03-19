@@ -1,21 +1,13 @@
 import React from "react";
 import axios from "axios";
 import TaskList from "./TaskList";
+import store from "../redux/store";
+import { loadTasks } from '../redux/store';
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      tasks: []
-    }
-  }
 
   async componentDidMount() {
-    const res = await axios.get('/api/tasks');
-    const task = res.data;
-    this.setState({
-      tasks: task
-    })
+   await store.dispatch(loadTasks());
   }
 
   render() {
@@ -23,11 +15,13 @@ class App extends React.Component {
       <div>
         <h1>Fullstack Task</h1>
         <div className="container">
-          <TaskList tasks={this.state.tasks}/>
+          <TaskList />
         </div>
       </div>
     )
   }
 }
+
+
 
 export default App;

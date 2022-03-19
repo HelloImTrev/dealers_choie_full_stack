@@ -1,7 +1,8 @@
 import React from "react";
+import { connect, useSelector } from "react-redux";
 
 const TaskList = ({tasks}) => {
-  
+
   return(
     <ul>
       {tasks.map(task => {
@@ -11,4 +12,13 @@ const TaskList = ({tasks}) => {
   )
 }
 
-export default TaskList;
+const mapState = state => state;
+
+// const mapState = state => {
+//   return {
+//     tasks: state.tasks
+//   }
+// };
+
+
+export default connect(mapState,{})(TaskList);
