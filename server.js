@@ -13,8 +13,8 @@ const Task = sequelize.define("task", {
 
 const init = async () => {
   await sequelize.sync({ force: true });
-  Task.create({taskName: 'Wash Car'});
-  Task.create({taskName: 'Do Laundry'});
+  Task.create({ taskName: "Wash Car" });
+  Task.create({ taskName: "Do Laundry" });
 };
 
 init();
@@ -25,15 +25,26 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(express.json());
 app.use("/dist", express.static(path.join(__dirname, "dist")));
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.get('/api/tasks', async (req, res, next) => {
-  try{
+app.post("/api/tasks", async (req, res, next) => {
+  try {
+    const newTask = await Task.create(req.body);
+    console.log(`New task '${newTask}' has been created`);
+    res.status(201).send(newTask);
+  } catch (e) {
+    next(e);
+  }
+});
+
+app.get("/api/tasks", async (req, res, next) => {
+  try {
     res.send(await Task.findAll({}));
-  } catch(e) {
+  } catch (e) {
     next(e);
   }
 });

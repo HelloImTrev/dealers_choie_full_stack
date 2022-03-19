@@ -3,6 +3,7 @@ import axios from "axios";
 import TaskList from "./TaskList";
 import store from "../redux/store";
 import { loadTasks } from '../redux/store';
+import CreateTask from "./CreateTask";
 
 class App extends React.Component {
 
@@ -16,6 +17,7 @@ class App extends React.Component {
         <h1>Fullstack Task</h1>
         <div className="container">
           <TaskList />
+          <CreateTask />
         </div>
       </div>
     )

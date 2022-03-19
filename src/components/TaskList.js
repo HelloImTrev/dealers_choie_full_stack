@@ -14,11 +14,4 @@ const TaskList = ({tasks}) => {
 
 const mapState = state => state;
 
-// const mapState = state => {
-//   return {
-//     tasks: state.tasks
-//   }
-// };
-
-
 export default connect(mapState,{})(TaskList);

@@ -4,6 +4,7 @@ import thunk from "redux-thunk";
 
 //ACTION CONSTANTS
 const LOAD_TASKS = 'LOAD_TASK';
+const CREATE_TASK = 'CREATE_TASK';
 
 //ACTION CREATORS
 const _loadTasks = (tasks) => {
@@ -13,11 +14,24 @@ const _loadTasks = (tasks) => {
   };
 }
 
+const _createTask = (task) => {
+  return {
+    type: CREATE_TASK,
+    task
+  }
+}
+
 //THUNK
 export const loadTasks = () => {
   return async (dispatch) => {
     const tasks = (await axios.get('/api/tasks')).data;
     dispatch(_loadTasks(tasks));
+  }
+}
+
+export const createTask = () => {
+  return async (dispatch) => {
+      
   }
 }
 
