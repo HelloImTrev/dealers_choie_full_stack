@@ -1,16 +1,21 @@
 import React from "react";
 import axios from "axios";
+import TaskList from "./TaskList";
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      task: []
+      tasks: []
     }
   }
 
-  componentDidMount() {
-    
+  async componentDidMount() {
+    const res = await axios.get('/api/tasks');
+    const task = res.data;
+    this.setState({
+      tasks: task
+    })
   }
 
   render() {
@@ -18,6 +23,7 @@ class App extends React.Component {
       <div>
         <h1>Fullstack Task</h1>
         <div className="container">
+          <TaskList tasks={this.state.tasks}/>
         </div>
       </div>
     )

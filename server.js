@@ -30,6 +30,14 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
+app.get('/api/tasks', async (req, res, next) => {
+  try{
+    res.send(await Task.findAll({}));
+  } catch(e) {
+    next(e);
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });
