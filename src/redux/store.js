@@ -20,7 +20,7 @@ const _createTask = (task) => {
     type: CREATE_TASK,
     task
   }
-}
+};
 
 //THUNK
 export const loadTasks = () => {

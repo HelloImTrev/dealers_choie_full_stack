@@ -24,6 +24,9 @@ class CreateTask extends React.Component {
     const newTask = event.target.taskName.value; 
 
     this.props.createNewTask(newTask);
+    this.setState({
+      task:''
+    })
   }
 
   render() {
@@ -33,7 +36,7 @@ class CreateTask extends React.Component {
         <button type="submit">Add Task</button>
       </form>
     )
-  }
+  };
 };
 
 const mapDispatch = (dispatch) => {

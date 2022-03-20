@@ -1,0 +1,12 @@
+body {
+  box-sizing: border-box;
+}
+
+.landing-page {
+  text-align: center;
+}
+
+.landing-nav {
+  display: flex;
+  justify-content: space-evenly;
+}

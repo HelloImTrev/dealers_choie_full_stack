@@ -4,6 +4,8 @@ import TaskList from "./TaskList";
 import store from "../redux/store";
 import { loadTasks } from '../redux/store';
 import CreateTask from "./CreateTask";
+import LandingPage from "./LandingPage";
+
 
 class App extends React.Component {
 
@@ -14,16 +16,14 @@ class App extends React.Component {
   render() {
     return(
       <div>
-        <h1>Fullstack Task</h1>
-        <div className="container">
-          <TaskList />
-          <CreateTask />
+        <div className="root-container">
+          <LandingPage />
+          {/* <TaskList />
+          <CreateTask /> */}
         </div>
       </div>
     )
   }
 }
-
-
 
 export default App;
