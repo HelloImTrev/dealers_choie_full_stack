@@ -1,10 +1,11 @@
 import React from "react";
-import axios from "axios";
 import TaskList from "./TaskList";
 import store from "../redux/store";
 import { loadTasks } from '../redux/store';
 import CreateTask from "./CreateTask";
 import LandingPage from "./LandingPage";
+import { Route } from "react-router-dom";
+import EmployeePage from "./EmployeePage";
 
 
 class App extends React.Component {
@@ -17,9 +18,9 @@ class App extends React.Component {
     return(
       <div>
         <div className="root-container">
-          <LandingPage />
-          {/* <TaskList />
-          <CreateTask /> */}
+          <Route exact path='/' component={LandingPage} />
+          <Route path='/employees' component={EmployeePage} />
+          <Route path='/tasklist' component={TaskList} />
         </div>
       </div>
     )

@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const LandingNav = () => {
   return(
     <nav className="landing-nav">
-      <button>Employee List</button>
-      <button><a>Project List</a></button>
+      <Link to='/employees'><button>Employee List</button></Link>
+      <Link to='/tasklist'><button>Task List</button></Link>
     </nav>
   )
 }
