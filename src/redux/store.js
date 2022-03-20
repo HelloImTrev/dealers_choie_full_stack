@@ -15,6 +15,7 @@ const _loadTasks = (tasks) => {
 }
 
 const _createTask = (task) => {
+  console.log(task);
   return {
     type: CREATE_TASK,
     task
@@ -29,9 +30,14 @@ export const loadTasks = () => {
   }
 }
 
-export const createTask = () => {
+export const createNewTask = (task) => {
   return async (dispatch) => {
-      
+    try{
+      const res = await (await axios.post('/api/tasks', {taskName: task})).data;
+      dispatch(_createTask(res));
+    } catch(e) {
+      console.log(e);
+    }
   }
 }
 
@@ -40,6 +46,8 @@ const taskReducer = (state = [], action) => {
   switch(action.type) {
     case LOAD_TASKS:
       return action.tasks;
+    case CREATE_TASK:
+      return state = [...state, action.task];
     default:
       return state;
   }

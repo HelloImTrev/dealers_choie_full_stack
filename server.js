@@ -27,18 +27,20 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use("/dist", express.static(path.join(__dirname, "dist")));
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
-});
 
 app.post("/api/tasks", async (req, res, next) => {
   try {
+    console.log(req.body);
     const newTask = await Task.create(req.body);
-    console.log(`New task '${newTask}' has been created`);
+    //console.log(`New task '${newTask}' has been created`);
     res.status(201).send(newTask);
   } catch (e) {
     next(e);
   }
+});
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 app.get("/api/tasks", async (req, res, next) => {
