@@ -1,5 +1,44 @@
-body {
+* {
   box-sizing: border-box;
+}
+
+body {
+  background-color:#eef6ff ;
+}
+
+#employee-page {
+  margin: 0;
+}
+
+#employee-side-bar {
+  width: 300px;
+  height: 100%;
+  background-color: #60a2ff;
+  border-right: solid 1px #eef6ff;
+  position: fixed;
+  text-align: center;
+}
+
+#tasklist-side-bar {
+  width: 300px;
+  height: 100%;
+  background-color: #60a2ff;
+  position: fixed;
+  left: 0;
+  top: 0;
+  box-shadow: 3px 0 5px rgb(185, 185, 185);
+  text-align: center;
+}
+
+#main-nav {
+  position: fixed;
+}
+
+.tasklist-container {
+  position: fixed;
+  top: 25px;
+  left: 25%;
+  right: 4%;
 }
 
 .landing-page {

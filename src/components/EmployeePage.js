@@ -1,9 +1,10 @@
 import React from "react";
+import EmployeeSideBar from "./EmployeeSideBar";
 
 const EmployeePage = () => {
   return(
-    <div>
-      <h1>Employee Page</h1>
+    <div id="employee-page">
+      <EmployeeSideBar />
     </div>
   )
 };

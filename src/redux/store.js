@@ -5,6 +5,7 @@ import thunk from "redux-thunk";
 //ACTION CONSTANTS
 const LOAD_TASKS = 'LOAD_TASK';
 const CREATE_TASK = 'CREATE_TASK';
+const DELETE_TASK = 'DELETE_TASK';
 
 //ACTION CREATORS
 const _loadTasks = (tasks) => {
@@ -15,12 +16,18 @@ const _loadTasks = (tasks) => {
 }
 
 const _createTask = (task) => {
-  console.log(task);
   return {
     type: CREATE_TASK,
     task
   }
 };
+
+const _deleteTask = (task) => {
+  return{
+    type: DELETE_TASK,
+    task
+  }
+}
 
 //THUNK
 export const loadTasks = () => {
@@ -41,13 +48,27 @@ export const createNewTask = (task) => {
   }
 }
 
+export const deleteTask = (task) => {
+  return async (dispatch) => {
+    console.log(task);
+    try{
+      await axios.delete(`/api/tasks/${task.id}`);
+      dispatch(_deleteTask(task));
+    } catch(e) {
+      console.log(e);
+    }
+  }
+}
+
 //REUDCERS
 const taskReducer = (state = [], action) => {
   switch(action.type) {
     case LOAD_TASKS:
       return action.tasks;
     case CREATE_TASK:
-      return state = [...state, action.task];
+      return [...state, action.task];
+    case DELETE_TASK:
+      return state.filter(task => task.id !== action.task.id)
     default:
       return state;
   }

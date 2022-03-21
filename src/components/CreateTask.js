@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "bootstrap";
 import { connect, useDispatch } from "react-redux";
 import { createNewTask } from "../redux/store";
 
@@ -32,8 +33,9 @@ class CreateTask extends React.Component {
   render() {
     return(
       <form onSubmit={this.handleSubmit}>
-        <input name="taskName" placeholder="Enter task name" onChange={this.handleChange} value={this.state.task}/>
-        <button type="submit">Add Task</button>
+        <label className="side-label">Task: </label>
+        <input className="side-input" name="taskName" placeholder="Enter task name" onChange={this.handleChange} value={this.state.task}/> <br />
+        <button className="side-button" type="submit">Add Task</button>
       </form>
     )
   };

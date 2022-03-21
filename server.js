@@ -9,7 +9,20 @@ const Task = sequelize.define("task", {
       notEmpty: true,
     },
   },
+  employeeId: {
+    type: DataTypes.INTEGER,
+    defaultValue: null
+  }
 });
+
+const Employee = sequelize.define("employee", {
+  name: {
+    type: DataTypes.STRING,
+    validate: {
+      notEmpty: true,
+    },
+  }
+})
 
 const init = async () => {
   await sequelize.sync({ force: true });
@@ -36,6 +49,16 @@ app.post("/api/tasks", async (req, res, next) => {
     console.log(`New task '${newTask}' has been created`);
     res.status(201).send(newTask);
   } catch (e) {
+    next(e);
+  }
+});
+
+app.delete('/api/tasks/:id', async(req, res, next) => {
+  try{
+    const deletedTask = await Task.findByPk(req.params.id);
+    await deletedTask.destroy();
+    res.sendStatus(204);
+  } catch(e) {
     next(e);
   }
 });
