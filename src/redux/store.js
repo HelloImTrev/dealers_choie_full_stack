@@ -6,6 +6,7 @@ import thunk from "redux-thunk";
 const LOAD_TASKS = 'LOAD_TASK';
 const CREATE_TASK = 'CREATE_TASK';
 const DELETE_TASK = 'DELETE_TASK';
+const UPDATE_TASK = 'UPDATE_TASK';
 
 const LOAD_EMPLOYEES = 'LOAD_EMPLOYEES';
 const CREATE_EMPLOYEE = 'CREATE_EMPLOYEE';
@@ -54,10 +55,16 @@ const _deleteEmployee = (employee) => {
   }
 }
 
+const _updateTask = (tasks) => {
+  return{
+    type: UPDATE_TASK,
+    tasks
+  }
+}
+
 //THUNKS
 export const loadTasks = () => {
   return async (dispatch) => {
-    console.log('load task called');
     const tasks = (await axios.get('/api/tasks')).data;
     dispatch(_loadTasks(tasks));
   }
@@ -65,7 +72,6 @@ export const loadTasks = () => {
 
 export const loadEmployees = () => {
   return async (dispatch) => {
-    console.log('load emplopyees called');
     const employees = (await axios.get('/api/employees')).data;
     dispatch(_loadEmployees(employees));
   }
@@ -116,6 +122,19 @@ export const deleteEmployee = (employee) => {
   }
 }
 
+export const updateTask = (task) => {
+  console.log(task);
+  return async (dispatch) => {
+    try {
+      await axios.put(`/api/tasks/${task.id}`);
+      const updatedTasks = (await axios.get('/api/tasks')).data;
+      dispatch(_updateTask(updatedTasks));
+    } catch(e) {
+      console.log(e);
+    }
+  }
+}
+
 //REUDCERS
 const taskReducer = (state = [], action) => {
   switch(action.type) {
@@ -123,6 +142,8 @@ const taskReducer = (state = [], action) => {
       return action.tasks;
     case CREATE_TASK:
       return [...state, action.task];
+    case UPDATE_TASK:
+      return action.tasks;
     case DELETE_TASK:
       return state.filter(task => task.id !== action.task.id)
     default:

@@ -79,6 +79,20 @@ app.post("/api/employees", async (req, res, next) => {
   }
 });
 
+app.put('/api/tasks/:id', async (req, res, next) => {
+  try {
+    const task = await Task.findByPk(req.params.id);
+
+    task.update({
+      employeeId: null
+    });
+
+    res.sendStatus(200);
+  } catch(e) {
+    next(e);
+  }
+});
+
 app.delete("/api/tasks/:id", async (req, res, next) => {
   try {
     const deletedTask = await Task.findByPk(req.params.id);

@@ -22,8 +22,39 @@ h4 {
   position: fixed;
 }
 
+#employeelist-page {
+  background-color: yellow !important;
+
+}
+
+.footer {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 200 !important;
+}
+
 .landing-page {
   text-align: center;
+}
+
+.landing-page-circle {
+  height: 550px;
+  width: 100%;
+  top: 0;
+  left: 0%;
+  z-index: -1;
+  transform: rotate(180deg);
+  border-radius: 3400px 3400px 0 0;
+  position: absolute;
+  background-color:#eef6ff;
+}
+
+.landing-page-background {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -2;
+  background-color: #60a2ff;
 }
 
 .landing-nav {
@@ -35,7 +66,7 @@ h4 {
 }
 
 .landing-page {
-  margin: 12% auto
+  margin: 7% auto
 }
 
 .landing-btn {
@@ -96,4 +127,8 @@ h4 {
 
 .side-bar-nav-link:hover {
   color: #cde3fc;
+}
+
+.task-button {
+  margin: .5rem !important;
 }

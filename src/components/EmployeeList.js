@@ -19,8 +19,8 @@ const EmployeeList = () => {
                 <Card.Body>
                   <Card.Title>Employee: {employee.name}</Card.Title>
                   <Card.Text>
-                    Current Task:
-                    {employee.tasks ? employee.tasks.map((task) => (<li key={task.id}>{task.taskName}</li>)) : 'None'}
+                    Current Tasks:
+                    {employee.tasks ? employee.tasks.map((task) => (<li key={task.id}>{task.taskName}</li>)) : ''}
                   </Card.Text>
                   <Button onClick={() => dispatch(deleteEmployee(employee))} variant="danger">Fire Employee</Button>
                 </Card.Body>

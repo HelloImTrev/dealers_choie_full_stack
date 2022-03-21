@@ -1,7 +1,7 @@
 import React from "react";
 import TaskListSideBar from "./TasklistSideBar";
 import { Card, Row, Col, Button } from "react-bootstrap";
-import { deleteTask } from "../redux/store";
+import { deleteTask, updateTask } from "../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 
 const TaskList = () => {
@@ -22,7 +22,8 @@ const TaskList = () => {
                   <Card.Text>
                     Current Assignee: {task.employeeId ? task.employee.name : 'unassigned'}
                   </Card.Text>
-                  <Button onClick={() => dispatch(deleteTask(task))} variant="danger">Delete</Button>
+                  <Button className="task-button" onClick={() => dispatch(deleteTask(task))} variant="danger">Delete</Button>
+                  <Button className="task-button" onClick={() => dispatch(updateTask(task))} variant="warning">Unassign</Button>
                 </Card.Body>
               </Card>
             </Col>
