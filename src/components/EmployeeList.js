@@ -17,7 +17,7 @@ const EmployeeList = () => {
             <Col key={employee.id}>
               <Card>
                 <Card.Body>
-                  <Card.Title>Task: {employee.name}</Card.Title>
+                  <Card.Title>Employee: {employee.name}</Card.Title>
                   <Card.Text>Task list will go here</Card.Text>
                   <Button onClick={() => console.log("hi")} variant="danger">
                     Fire Employee

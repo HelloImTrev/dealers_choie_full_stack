@@ -3,11 +3,41 @@
 }
 
 body {
-  background-color:#eef6ff ;
+  background-color:#eef6ff !important ;
+}
+
+h1 {
+  color: #60a2ff;
+  font-size: 100px !important;
+  font-family: 'Abril Fatface', cursive;
+}
+
+h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 200 !important;
 }
 
 #main-nav {
   position: fixed;
+}
+
+.landing-page {
+  margin-top: 15%;
+}
+
+.landing-btn {
+  background-color:#60a2ff !important;
+  border-color: #60a2ff !important;
+}
+
+.landing-btn:hover {
+  background-color:#5691e2 !important;
+  border-color: #5691e2 !important;
+}
+
+.employee-name-input, .task-name-input {
+  width: 88% !important;
+  margin: 1rem;
 }
 
 .list-container {
@@ -29,6 +59,7 @@ body {
 .side-bar {
   width: 300px;
   height: 100%;
+  margin-right: 5rem;
   background-color: #60a2ff;
   position: fixed;
   left: 0;

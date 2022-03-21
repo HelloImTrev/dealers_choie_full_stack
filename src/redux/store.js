@@ -8,6 +8,7 @@ const CREATE_TASK = 'CREATE_TASK';
 const DELETE_TASK = 'DELETE_TASK';
 
 const LOAD_EMPLOYEES = 'LOAD_EMPLOYEES';
+const CREATE_EMPLOYEE = 'CREATE_EMPLOYEE';
 
 //ACTION CREATORS
 const _loadTasks = (tasks) => {
@@ -30,6 +31,13 @@ const _createTask = (task) => {
     task
   }
 };
+
+const _createEmployee = (employee) => {
+  return {
+    type: CREATE_EMPLOYEE,
+    employee
+  }
+}
 
 const _deleteTask = (task) => {
   return{
@@ -60,6 +68,17 @@ export const createNewTask = (task) => {
     try{
       const res = (await axios.post('/api/tasks', {taskName: task})).data;
       dispatch(_createTask(res));
+    } catch(e) {
+      console.log(e);
+    }
+  }
+}
+
+export const createEmployee =(employee) => {
+  return async (dispatch) => {
+    try{
+      const res = (await axios.post('/api/employees', {name: employee})).data;
+      dispatch(_createEmployee(res));
     } catch(e) {
       console.log(e);
     }

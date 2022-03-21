@@ -49,11 +49,19 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 
 app.post("/api/tasks", async (req, res, next) => {
   try {
-    console.log(req.body);
     const newTask = await Task.create(req.body);
     console.log(`New task '${newTask}' has been created`);
     res.status(201).send(newTask);
   } catch (e) {
+    next(e);
+  }
+});
+
+app.post("/api/employees", async (req, res, next) =>{
+  try{
+    const newEmployee = await Employee.create(req.body);
+    res.status(201).send(newEmployee);
+  } catch(e) {
     next(e);
   }
 });

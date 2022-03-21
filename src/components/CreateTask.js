@@ -33,9 +33,9 @@ class CreateTask extends React.Component {
   render() {
     return(
       <form onSubmit={this.handleSubmit}>
-        <label className="side-label">Task: </label>
-        <input className="side-input" name="taskName" placeholder="Enter task name" onChange={this.handleChange} value={this.state.task}/> <br />
-        <button className="side-button" type="submit">Add Task</button>
+        <input type="text" name="taskName" className="task-name-input form-control" placeholder="Task Name" aria-label="Name" aria-describedby="addon-wrapping" onChange={this.handleChange} value={this.state.task}/>
+        {/* <input className="side-input" name="taskName" placeholder="Enter task name" onChange={this.handleChange} value={this.state.task}/> <br /> */}
+        <button className="side-button btn btn-success" type="submit">Add Task</button>
       </form>
     )
   };
