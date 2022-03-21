@@ -9,6 +9,7 @@ const DELETE_TASK = 'DELETE_TASK';
 
 const LOAD_EMPLOYEES = 'LOAD_EMPLOYEES';
 const CREATE_EMPLOYEE = 'CREATE_EMPLOYEE';
+const DELETE_EMPLOYEE = 'DELETE_EMPLOYEE';
 
 //ACTION CREATORS
 const _loadTasks = (tasks) => {
@@ -43,6 +44,13 @@ const _deleteTask = (task) => {
   return{
     type: DELETE_TASK,
     task
+  }
+}
+
+const _deleteEmployee = (employee) => {
+  return{
+    type: DELETE_EMPLOYEE,
+    employee
   }
 }
 
@@ -88,10 +96,20 @@ export const createNewEmployee =(employee) => {
 
 export const deleteTask = (task) => {
   return async (dispatch) => {
-    console.log(task);
     try{
       await axios.delete(`/api/tasks/${task.id}`);
       dispatch(_deleteTask(task));
+    } catch(e) {
+      console.log(e);
+    }
+  }
+}
+
+export const deleteEmployee = (employee) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`/api/employees/${employee.id}`);
+      dispatch(_deleteEmployee(employee));
     } catch(e) {
       console.log(e);
     }
@@ -118,6 +136,8 @@ const employeeReducer = (state = [], action) => {
       return action.employees;
     case CREATE_EMPLOYEE:
       return [...state, action.employee];
+    case DELETE_EMPLOYEE:
+      return state.filter(employee => employee.id !== action.employee.id);
     default:
       return state;
   }

@@ -34,5 +34,3 @@ const TaskList = () => {
 };
 
 export default TaskList;
-
-//export default connect(mapState, mapDispatch)(TaskList);

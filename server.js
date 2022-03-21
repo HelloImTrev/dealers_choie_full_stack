@@ -40,7 +40,7 @@ const init = async () => {
       Task.create({ taskName: "Wash Car", employeeId: fred.id }),
       Task.create({ taskName: "Do Laundry", employeeId: susey.id }),
       Task.create({ taskName: "Do a little cheat", employeeId: prof.id }),
-      Task.create({ taskName: "Deploy app", employeeId: prof.id })
+      Task.create({ taskName: "Deploy app", employeeId: prof.id }),
     ]);
   } catch (e) {
     console.log(e);
@@ -83,6 +83,18 @@ app.delete("/api/tasks/:id", async (req, res, next) => {
   try {
     const deletedTask = await Task.findByPk(req.params.id);
     await deletedTask.destroy();
+    res.sendStatus(204);
+  } catch (e) {
+    next(e);
+  }
+});
+
+app.delete("/api/employees/:id", async (req, res, next) => {
+  try {
+    console.log('server id:',req.params.id)
+    const deletedEmployee = await Employee.findByPk(req.params.id);
+    console.log('deleted employee:', deletedEmployee);
+    await deletedEmployee.destroy();
     res.sendStatus(204);
   } catch (e) {
     next(e);
