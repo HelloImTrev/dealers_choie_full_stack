@@ -40,6 +40,7 @@ const init = async () => {
       Task.create({ taskName: "Wash Car", employeeId: fred.id }),
       Task.create({ taskName: "Do Laundry", employeeId: susey.id }),
       Task.create({ taskName: "Do a little cheat", employeeId: prof.id }),
+      Task.create({ taskName: "Deploy app", employeeId: prof.id })
     ]);
   } catch (e) {
     console.log(e);

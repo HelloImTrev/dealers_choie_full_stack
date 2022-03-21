@@ -4,8 +4,7 @@ import { Card, Row, Col, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 const EmployeeList = () => {
-
-  const employees = useSelector(state => state.employees);
+  const employees = useSelector((state) => state.employees);
 
   return (
     <div id="employeelist-page">
@@ -17,7 +16,11 @@ const EmployeeList = () => {
               <Card>
                 <Card.Body>
                   <Card.Title>Employee: {employee.name}</Card.Title>
-                  <Card.Text>Task list will go here</Card.Text>
+                  <Card.Text>
+                  {employee.tasks ?  
+                  employee.tasks.map(task => <li key={task.id}>{task.taskName}</li>) :
+                  'No task assigned'}
+                  </Card.Text>
                   <Button onClick={() => console.log("hi")} variant="danger">
                     Fire Employee
                   </Button>
