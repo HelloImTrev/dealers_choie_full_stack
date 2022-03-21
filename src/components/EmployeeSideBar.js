@@ -4,7 +4,7 @@ import CreateEmployee from "./CreateEmployee";
 const EmployeeSideBar = () => {
   return (
     <div className="side-bar">
-      <section className="sidebar">
+      <section className="side-bar-inputs">
         <h3 className="side-bar-title">New Employee</h3>
         <CreateEmployee />
       </section>
