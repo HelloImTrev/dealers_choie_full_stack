@@ -11,8 +11,7 @@ const Task = sequelize.define("task", {
   },
   employeeId: {
     type: DataTypes.INTEGER,
-    defaultValue: null
-  }
+  },
 });
 
 const Employee = sequelize.define("employee", {
@@ -21,18 +20,30 @@ const Employee = sequelize.define("employee", {
     validate: {
       notEmpty: true,
     },
-  }
-})
+  },
+});
+
+Task.belongsTo(Employee);
+Employee.hasMany(Task);
 
 const init = async () => {
-  await sequelize.sync({ force: true });
-  Task.create({ taskName: "Wash Car" });
-  Task.create({ taskName: "Do Laundry" });
-  Task.create({ taskName: "Do a little cheat" });
+  try {
+    await sequelize.sync({ force: true });
 
-  Employee.create({ name: 'Eric (Prof) Katz'});
-  Employee.create({ name: 'Fred'});
-  Employee.create({ name: 'Susey'});
+    const [prof, fred, susey] = await Promise.all([
+      Employee.create({ name: "Eric (Prof) Katz" }),
+      Employee.create({ name: "Fred" }),
+      Employee.create({ name: "Susey" }),
+    ]);
+
+    await Promise.all([
+      Task.create({ taskName: "Wash Car", employeeId: fred.id }),
+      Task.create({ taskName: "Do Laundry", employeeId: susey.id }),
+      Task.create({ taskName: "Do a little cheat", employeeId: prof.id }),
+    ]);
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 init();
@@ -57,21 +68,22 @@ app.post("/api/tasks", async (req, res, next) => {
   }
 });
 
-app.post("/api/employees", async (req, res, next) =>{
-  try{
+app.post("/api/employees", async (req, res, next) => {
+  try {
     const newEmployee = await Employee.create(req.body);
+    console.log(`New task '${newEmployee}' has been created`);
     res.status(201).send(newEmployee);
-  } catch(e) {
+  } catch (e) {
     next(e);
   }
 });
 
-app.delete('/api/tasks/:id', async(req, res, next) => {
-  try{
+app.delete("/api/tasks/:id", async (req, res, next) => {
+  try {
     const deletedTask = await Task.findByPk(req.params.id);
     await deletedTask.destroy();
     res.sendStatus(204);
-  } catch(e) {
+  } catch (e) {
     next(e);
   }
 });
@@ -82,16 +94,24 @@ app.get("/", (req, res) => {
 
 app.get("/api/tasks", async (req, res, next) => {
   try {
-    res.send(await Task.findAll({}));
+    res.send(
+      await Task.findAll({
+        include: [Employee],
+      })
+    );
   } catch (e) {
     next(e);
   }
 });
 
 app.get("/api/employees", async (req, res, next) => {
-  try{
-    res.send(await Employee.findAll({}));
-  } catch(e) {
+  try {
+    res.send(
+      await Employee.findAll({
+        include: [Task],
+      })
+    );
+  } catch (e) {
     next(e);
   }
 });

@@ -74,9 +74,10 @@ export const createNewTask = (task) => {
   }
 }
 
-export const createEmployee =(employee) => {
+export const createNewEmployee =(employee) => {
   return async (dispatch) => {
     try{
+      console.log(employee);
       const res = (await axios.post('/api/employees', {name: employee})).data;
       dispatch(_createEmployee(res));
     } catch(e) {
@@ -115,6 +116,8 @@ const employeeReducer = (state = [], action) => {
   switch(action.type) {
     case LOAD_EMPLOYEES:
       return action.employees;
+    case CREATE_EMPLOYEE:
+      return [...state, action.employee];
     default:
       return state;
   }

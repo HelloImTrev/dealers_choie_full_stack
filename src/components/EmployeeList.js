@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 const EmployeeList = () => {
 
   const employees = useSelector(state => state.employees);
-  console.log(`employees: ${employees}`);
 
   return (
     <div id="employeelist-page">
