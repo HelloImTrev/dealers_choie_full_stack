@@ -7,11 +7,20 @@ const LOAD_TASKS = 'LOAD_TASK';
 const CREATE_TASK = 'CREATE_TASK';
 const DELETE_TASK = 'DELETE_TASK';
 
+const LOAD_EMPLOYEES = 'LOAD_EMPLOYEES';
+
 //ACTION CREATORS
 const _loadTasks = (tasks) => {
   return {
     type: LOAD_TASKS,
     tasks
+  };
+}
+
+const _loadEmployees = (employees) => {
+  return{
+    type: LOAD_EMPLOYEES,
+    employees
   };
 }
 
@@ -29,18 +38,27 @@ const _deleteTask = (task) => {
   }
 }
 
-//THUNK
+//THUNKS
 export const loadTasks = () => {
   return async (dispatch) => {
+    console.log('load task called');
     const tasks = (await axios.get('/api/tasks')).data;
     dispatch(_loadTasks(tasks));
+  }
+}
+
+export const loadEmployees = () => {
+  return async (dispatch) => {
+    console.log('load emplopyees called');
+    const employees = (await axios.get('/api/employees')).data;
+    dispatch(_loadEmployees(employees));
   }
 }
 
 export const createNewTask = (task) => {
   return async (dispatch) => {
     try{
-      const res = await (await axios.post('/api/tasks', {taskName: task})).data;
+      const res = (await axios.post('/api/tasks', {taskName: task})).data;
       dispatch(_createTask(res));
     } catch(e) {
       console.log(e);
@@ -74,10 +92,19 @@ const taskReducer = (state = [], action) => {
   }
 }
 
+const employeeReducer = (state = [], action) => {
+  switch(action.type) {
+    case LOAD_EMPLOYEES:
+      return action.employees;
+    default:
+      return state;
+  }
+}
+
 //ROOT REDUCER
 const reducer = combineReducers({
-  tasks: taskReducer
-  //TODO Add user reducer
+  tasks: taskReducer,
+  employees: employeeReducer
 })
 
 //STORE

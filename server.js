@@ -28,6 +28,11 @@ const init = async () => {
   await sequelize.sync({ force: true });
   Task.create({ taskName: "Wash Car" });
   Task.create({ taskName: "Do Laundry" });
+  Task.create({ taskName: "Do a little cheat" });
+
+  Employee.create({ name: 'Eric (Prof) Katz'});
+  Employee.create({ name: 'Fred'});
+  Employee.create({ name: 'Susey'});
 };
 
 init();
@@ -71,6 +76,14 @@ app.get("/api/tasks", async (req, res, next) => {
   try {
     res.send(await Task.findAll({}));
   } catch (e) {
+    next(e);
+  }
+});
+
+app.get("/api/employees", async (req, res, next) => {
+  try{
+    res.send(await Employee.findAll({}));
+  } catch(e) {
     next(e);
   }
 });

@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import TaskListSideBar from "./TasklistSideBar";
 import { Card, Row, Col, Button } from "react-bootstrap";
 import { deleteTask } from "../redux/store";
@@ -13,7 +12,7 @@ const TaskList = () => {
   return (
     <div id="tasklist-page">
       <TaskListSideBar />
-      <div className="tasklist-container">
+      <div className="list-container">
         <Row md={3} className="g-4">
           {tasks.map((task) => (
             <Col key={task.id}>
