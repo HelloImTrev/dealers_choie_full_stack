@@ -1,8 +1,8 @@
 import React from "react";
 import TaskList from "./TaskList";
 import store from "../redux/store";
-import { loadTasks, loadEmployees } from '../redux/store';
-import CreateTask from "./CreateTask";
+import { loadTasks } from "../redux/reducers/taskReducer";
+import { loadEmployees } from "../redux/reducers/employeeReducer";
 import LandingPage from "./LandingPage";
 import { Route } from "react-router-dom";
 import EmployeeList from "./EmployeeList";

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createNewEmployee } from "../redux/store";
+import { createNewEmployee } from "../redux/reducers/employeeReducer";
 
 class CreateEmployee extends React.Component {
   constructor() {

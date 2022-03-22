@@ -2,7 +2,7 @@ import React from "react";
 import EmployeeSideBar from "./EmployeeSideBar";
 import { Card, Row, Col, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteEmployee } from "../redux/store";
+import { deleteEmployee } from "../redux/reducers/employeeReducer";
 
 const EmployeeList = () => {
   const employees = useSelector((state) => state.employees);

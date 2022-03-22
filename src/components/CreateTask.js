@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createNewTask } from "../redux/store";
+import { createNewTask } from "../redux/reducers/taskReducer";
 
 class CreateTask extends React.Component {
   constructor() {
