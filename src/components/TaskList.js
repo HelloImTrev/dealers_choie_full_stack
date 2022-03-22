@@ -18,12 +18,12 @@ const TaskList = () => {
             <Col key={task.id}>
               <Card>
                 <Card.Body>
+                  {console.log('task: ',task)}
                   <Card.Title>Task: {task.taskName}</Card.Title>
                   <Card.Text>
-                  <strong>Current Assignee:</strong> {task.employeeId ? task.employee.name : 'unassigned'}
+                  <strong>Current Assignee:</strong> {task.employee.name}
                   </Card.Text>
                   <Button className="task-button" onClick={() => dispatch(deleteTask(task))} variant="danger">Delete</Button>
-                  <Button className="task-button" onClick={() => dispatch(updateTask(task))} variant="warning">Un-assign</Button>
                 </Card.Body>
               </Card>
             </Col>

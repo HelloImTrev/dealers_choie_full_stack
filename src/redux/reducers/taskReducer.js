@@ -15,6 +15,7 @@ const _loadTasks = (tasks) => {
 };
 
 const _createTask = (task) => {
+  console.log('_createTask: ', task);
   return {
     type: CREATE_TASK,
     task
@@ -43,10 +44,10 @@ export const loadTasks = () => {
   }
 }
 
-export const createNewTask = (task) => {
+export const createNewTask = (task, assignee) => {
   return async (dispatch) => {
     try{
-      const res = (await axios.post('/api/tasks', {taskName: task})).data;
+      const res = (await axios.post('/api/tasks', {taskName: task, employeeId: assignee})).data;
       dispatch(_createTask(res));
     } catch(e) {
       console.log(e);

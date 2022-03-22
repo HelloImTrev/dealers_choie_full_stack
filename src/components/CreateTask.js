@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { createNewTask } from "../redux/reducers/taskReducer";
 
 class CreateTask extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       task: "",
     };
@@ -22,10 +22,13 @@ class CreateTask extends React.Component {
   async handleSubmit(event) {
     event.preventDefault();
     const newTask = event.target.taskName.value;
+    const assignee = event.target.taskAssignee.value;
 
-    this.props.createNewTask(newTask);
+    this.props.createNewTask(newTask, assignee);
+
     this.setState({
-      task: "",
+      task: '',
+      userId: '',
     });
   }
 
@@ -42,6 +45,10 @@ class CreateTask extends React.Component {
           onChange={this.handleChange}
           value={this.state.task}
         />
+        <select name="taskAssignee" className="task-assignee-select form-select" aria-label="Default select example">
+          <option defaultValue>Select assignee</option>
+          {this.props.employees.map(employee => <option value={employee.id} key={employee.id}>{employee.name}</option>)}
+        </select>
         <button className="side-button btn btn-success" type="submit">
           Add Task
         </button>
@@ -50,10 +57,12 @@ class CreateTask extends React.Component {
   }
 }
 
+const mapState = state => state;
+
 const mapDispatch = (dispatch) => {
   return {
-    createNewTask: (task) => dispatch(createNewTask(task)),
+    createNewTask: (task, assignee) => dispatch(createNewTask(task, assignee)),
   };
 };
 
-export default connect(null, mapDispatch)(CreateTask);
+export default connect(mapState, mapDispatch)(CreateTask);

@@ -89,7 +89,7 @@ h4 {
   border-color: #5691e2 !important;
 }
 
-.employee-name-input, .task-name-input {
+.employee-name-input, .task-name-input, .task-assignee-select {
   width: 88% !important;
   margin: 1rem;
 }
