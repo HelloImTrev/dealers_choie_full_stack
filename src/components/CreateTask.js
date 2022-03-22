@@ -1,30 +1,28 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createNewTask } from "../redux/reducers/taskReducer";
+import { loadEmployees } from "../redux/reducers/employeeReducer";
 
 class CreateTask extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      task: "",
+      task: '',
+      userId: ''
     };
 
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({
-      task: event.target.value,
-    });
   }
 
   async handleSubmit(event) {
     event.preventDefault();
-    const newTask = event.target.taskName.value;
-    const assignee = event.target.taskAssignee.value;
 
-    this.props.createNewTask(newTask, assignee);
+    const task = {
+      taskName: this.state.task,
+      employeeId: this.state.userId
+    }
+
+    this.props.createNewTask(task);
 
     this.setState({
       task: '',
@@ -42,12 +40,12 @@ class CreateTask extends React.Component {
           placeholder="Task Name"
           aria-label="Name"
           aria-describedby="addon-wrapping"
-          onChange={this.handleChange}
+          onChange={ev =>this.setState({ task: ev.target.value})}
           value={this.state.task}
         />
-        <select name="taskAssignee" className="task-assignee-select form-select" aria-label="Default select example">
+        <select name="taskAssignee" className="task-assignee-select form-select" aria-label="Default select example" onChange={ev => this.setState({ userId: ev.target.value })} value={this.state.userId}>
           <option defaultValue>Select assignee</option>
-          {this.props.employees.map(employee => <option value={employee.id} key={employee.id}>{employee.name}</option>)}
+          {this.props.employees.map(employee => <option key={employee.id} value={employee.id}>{employee.name}</option>)}
         </select>
         <button className="side-button btn btn-success" type="submit">
           Add Task
@@ -61,7 +59,8 @@ const mapState = state => state;
 
 const mapDispatch = (dispatch) => {
   return {
-    createNewTask: (task, assignee) => dispatch(createNewTask(task, assignee)),
+    createNewTask: (task) => dispatch(createNewTask(task)),
+    loadEmployees: () => dispatch(loadEmployees())
   };
 };
 

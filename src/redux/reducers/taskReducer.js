@@ -14,11 +14,10 @@ const _loadTasks = (tasks) => {
   };
 };
 
-const _createTask = (task) => {
-  console.log('_createTask: ', task);
+const _createTask = (tasks) => {
   return {
     type: CREATE_TASK,
-    task
+    tasks
   }
 };
 
@@ -44,11 +43,12 @@ export const loadTasks = () => {
   }
 }
 
-export const createNewTask = (task, assignee) => {
+export const createNewTask = (task) => {
   return async (dispatch) => {
     try{
-      const res = (await axios.post('/api/tasks', {taskName: task, employeeId: assignee})).data;
-      dispatch(_createTask(res));
+      await axios.post('/api/tasks', task);
+      const updatedTask = (await axios.get('/api/tasks')).data
+      dispatch(_createTask(updatedTask));
     } catch(e) {
       console.log(e);
     }
@@ -84,7 +84,7 @@ const taskReducer = (state = [], action) => {
     case LOAD_TASKS:
       return action.tasks;
     case CREATE_TASK:
-      return [...state, action.task];
+      return action.tasks;
     case UPDATE_TASK:
       return action.tasks;
     case DELETE_TASK:
