@@ -20,7 +20,7 @@ const TaskList = () => {
                 <Card.Body>
                   <Card.Title>Task: {task.taskName}</Card.Title>
                   <Card.Text>
-                    Current Assignee: {task.employeeId ? task.employee.name : 'unassigned'}
+                  <strong>Current Assignee:</strong> {task.employeeId ? task.employee.name : 'unassigned'}
                   </Card.Text>
                   <Button className="task-button" onClick={() => dispatch(deleteTask(task))} variant="danger">Delete</Button>
                   <Button className="task-button" onClick={() => dispatch(updateTask(task))} variant="warning">Un-assign</Button>

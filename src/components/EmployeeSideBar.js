@@ -13,6 +13,7 @@ const EmployeeSideBar = () => {
         <h3 className="side-bar-title">New Employee</h3>
         <CreateEmployee />
       </section>
+      <p className="employee-fire-warning"><em>*All task must be unassigned before firing*</em></p>
     </div>
   );
 };
